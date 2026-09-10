@@ -25,14 +25,27 @@ import {
 } from 'lucide-react';
 
 import { servicesData, portfolioProjects } from './data';
-import AIPortfolioSlider from './components/AIPortfolioSlider';
-import ToolkitSimulator from './components/ToolkitSimulator';
-import BroadcastMockup from './components/BroadcastMockup';
-import FigurineConfigurator from './components/FigurineConfigurator';
+import CaseStudyShowcase from './components/CaseStudyShowcase';
+import BigBossSlideshow from './components/BigBossSlideshow';
+import BanijaySlideshow from './components/BanijaySlideshow';
+import RaakhSlideshow from './components/RaakhSlideshow';
+import BengalFilesShowcase from './components/BengalFilesShowcase';
+import Zee5AdCreatives from './components/Zee5AdCreatives';
+import Zee5AwardCreatives from './components/Zee5AwardCreatives';
+import Zee5AICreatives from './components/Zee5AICreatives';
+import Zee5SmartplaySerials from './components/Zee5SmartplaySerials';
+import Zee5StaticsShowcase from './components/Zee5StaticsShowcase';
+import Zee5JHSShowcase from './components/Zee5JHSShowcase';
+import Zee5BdayCreative from './components/Zee5BdayCreative';
+import Zee5LogoShowcase from './components/Zee5LogoShowcase';
+import HeroPhotoCarousel from './components/HeroPhotoCarousel';
+import ExperienceSection from './components/ExperienceSection';
+import BrandLogo, { BrandLogoMark } from './components/BrandLogo';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'all' | 'entertainment' | 'sports-design'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'entertainment'>('all');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [photoMode, setPhotoMode] = useState<'studio' | 'original'>('studio');
   
   // Custom contact form state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -78,32 +91,27 @@ export default function App() {
       {/* STICKY GLASSMORPHISM NAVIGATION HEADER */}
       <header className="sticky top-0 z-50 border-b border-[#222222] bg-[#0a0a0a]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-none bg-white font-display text-sm font-black tracking-tighter text-black">
-              SR
-            </div>
-            <div>
-              <span className="font-display font-black text-sm tracking-widest text-white block uppercase">S. Rasanbhaire</span>
-              <div className="flex items-center gap-1.5">
-                <span className="h-1 w-1 bg-emerald-500 rounded-full" />
-                <span className="font-mono text-[9px] tracking-widest text-emerald-400 uppercase font-bold">White Rivers Media</span>
-              </div>
-            </div>
-          </div>
+          <button 
+            onClick={() => scrollToSection('hero')} 
+            className="flex items-center gap-3 text-left cursor-pointer focus:outline-none transition-transform active:scale-95"
+            aria-label="Return to top"
+          >
+            <BrandLogo size="md" showText={true} />
+          </button>
 
           {/* Nav Links */}
           <nav className="hidden items-center gap-8 md:flex">
             <button onClick={() => scrollToSection('about')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">About</button>
+            <button onClick={() => scrollToSection('experience')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">Experience</button>
             <button onClick={() => scrollToSection('services')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">Expertise</button>
             <button onClick={() => scrollToSection('portfolio-labs')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">Portfolio Projects</button>
-            <button onClick={() => scrollToSection('photoshop-lab')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">Photoshop Lab</button>
             <button onClick={() => scrollToSection('contact')} className="text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] hover:text-white transition">Contact</button>
           </nav>
 
           {/* Action CTA Button */}
           <button 
             onClick={() => scrollToSection('portfolio-labs')}
-            className="rounded-none bg-white text-black hover:bg-[#ccc] transition-colors px-5 py-2 text-[10px] font-bold uppercase tracking-[0.15em]"
+            className="rounded-none bg-white text-black hover:bg-zinc-200 transition-colors px-3 py-1.5 sm:px-4 sm:py-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] whitespace-nowrap"
           >
             [ View My Work ]
           </button>
@@ -134,18 +142,18 @@ export default function App() {
               Graphic Designer specializing in high-impact entertainment marketing, AI-integrated workflows, and digital brand campaigns. Currently creating at <span className="text-white font-medium underline decoration-offset-4 decoration-[#333]">White Rivers Media</span>.
             </p>
 
-            {/* CTA Widgets */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            {/* CTA Widgets: Compact & Locked onto the Same Line */}
+            <div className="flex items-center gap-2.5 sm:gap-3 pt-2 flex-nowrap">
               <button
                 onClick={() => scrollToSection('portfolio-labs')}
-                className="rounded-none bg-white text-black text-xs font-bold uppercase tracking-[0.2em] px-8 py-3.5 hover:bg-[#ccc] transition-colors"
+                className="rounded-none bg-white text-black text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] px-3.5 py-2 sm:px-6 sm:py-2.5 hover:bg-zinc-200 transition-colors whitespace-nowrap shadow-sm"
               >
                 View My Work
               </button>
 
               <button
                 onClick={() => scrollToSection('contact')}
-                className="rounded-none bg-[#111111] text-white text-xs font-bold uppercase tracking-[0.15em] px-6 py-3.5 border border-[#222] hover:border-[#444] transition-colors"
+                className="rounded-none bg-[#141414] text-white text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] px-3.5 py-2 sm:px-6 sm:py-2.5 border border-[#2e2e2e] hover:border-white transition-colors whitespace-nowrap shadow-sm"
               >
                 Let's Collaborate
               </button>
@@ -176,59 +184,16 @@ export default function App() {
             </div>
           </div>
 
-          {/* Interactive Designer Brand Card (Visual Spotlight) */}
-          <div className="relative lg:col-span-12 lg:col-start-8 lg:col-span-5 flex justify-center w-full">
-            <div className="relative z-10 w-full max-w-md rounded-none border border-[#222222] bg-[#111111] p-6 shadow-2xl space-y-6">
-              
-              {/* Card Header (Simulated editor window) */}
-              <div className="flex items-center justify-between border-b border-[#222222] pb-4">
-                <div className="flex items-center gap-1.5 opacity-60">
-                  <span className="h-2 w-2 rounded-none bg-[#333]" />
-                  <span className="h-2 w-2 rounded-none bg-[#333]" />
-                  <span className="h-2 w-2 rounded-none bg-[#333]" />
-                </div>
-                <span className="font-mono text-[9px] tracking-widest font-black text-white opacity-40 uppercase">SR_WORKSPACE_STAGE_V1.PSD</span>
-              </div>
-
-              {/* Main design mockup graphics representation */}
-              <div className="relative aspect-square w-full rounded-none overflow-hidden bg-black border border-[#222222]">
-                <img 
-                  src="https://picsum.photos/seed/designer-vibe/800/800" 
-                  alt="Spotlight graphic"
-                  className="h-full w-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Visual grid guides overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 pointer-events-none" />
-                
-                {/* Monogram tag */}
-                <div className="absolute top-4 right-4 bg-[#0a0a0a] text-white font-mono text-[9px] font-bold tracking-widest uppercase border border-[#222222] px-2.5 py-1 rounded-none">
-                  ★ SR MASTER
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 text-left">
-                  <span className="font-mono text-[9px] text-[#aaa] tracking-wider font-extrabold block uppercase">CURRENT ACTIVE LAYER</span>
-                  <p className="font-display font-medium text-lg text-white uppercase tracking-tight">Cinematic Composition Canvas</p>
-                </div>
-              </div>
-
-              {/* Work values list */}
-              <div className="space-y-3 pt-2 text-[12px] opacity-80 pl-2">
-                <div className="flex items-center gap-3">
-                  <div className="h-1.5 w-1.5 bg-white shrink-0" />
-                  <span className="text-[#cccccc]">Absolute priority on pure layout enhancement & pixel alignment</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="h-1.5 w-1.5 bg-white shrink-0" />
-                  <span className="text-[#cccccc]">Complex composite grading that speaks cinematic stories</span>
-                </div>
-              </div>
-            </div>
+          {/* Interactive Designer Brand Carousel */}
+          <div className="relative lg:col-span-5 flex justify-center items-center w-full">
+            <HeroPhotoCarousel />
           </div>
 
         </div>
       </section>
+
+      {/* VERIFIED PROFESSIONAL EXPERIENCE & AGENCY TENURE SECTION */}
+      <ExperienceSection />
 
       {/* ABOUT ME SECTION */}
       <section id="about" className="relative border-t border-[#222222] bg-[#0c0c0c] py-20">
@@ -351,7 +316,7 @@ export default function App() {
 
             {/* Filter buttons */}
             <div className="flex gap-2 self-start md:self-auto bg-[#111111] p-1.5 rounded-none border border-[#222222]">
-              {(['all', 'entertainment', 'sports-design'] as const).map((tab) => (
+              {(['all', 'entertainment'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => {
@@ -364,7 +329,7 @@ export default function App() {
                       : 'text-[#808080] hover:text-white'
                   }`}
                 >
-                  {tab === 'all' ? 'All projects' : tab === 'entertainment' ? 'Entertainment' : 'Sports & Figurine'}
+                  {tab === 'all' ? 'All Projects (14)' : 'Entertainment Campaigns'}
                 </button>
               ))}
             </div>
@@ -374,164 +339,230 @@ export default function App() {
           <div className="grid grid-cols-1 gap-8">
             
             {/* Show projects filtering */}
-            {filteredProjects.map((project) => (
-              <div 
-                key={project.id}
-                className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
-              >
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
-                  
-                  {/* Text Details Info (Col-1) */}
-                  <div className="space-y-4 lg:col-span-5 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] font-mono uppercase bg-[#1e1e1e] text-white border border-[#2c2c2c] px-2.5 py-0.5 rounded-none tracking-widest">
-                        {project.category === 'entertainment' ? 'Entertainment Campaign' : 'Sports Specialty'}
-                      </span>
-                      <span className="text-[9px] font-mono text-[#808080] tracking-wider uppercase font-semibold">• 300DPI Render File</span>
-                    </div>
-
-                    <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-white">
-                      {project.title}
-                    </h3>
-                    <p className="font-mono text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
-                      {project.subtitle}
-                    </p>
-                    <p className="text-xs text-zinc-400 leading-relaxed font-light">
-                      {project.description}
-                    </p>
-
-                    <div className="h-[1px] bg-[#222222]" />
-
-                    {/* Rich Details and Tools */}
-                    <div className="space-y-3 pt-1">
-                      <div className="space-y-1">
-                        <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold">Aesthetic Features & Deliverables:</span>
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          {project.keyFeatures.map((kf, i) => (
-                            <span key={i} className="rounded-none bg-[#1c1c1c] px-2.5 py-1 text-[10px] text-zinc-300 border border-[#2c2c2c] font-mono">
-                              ❖ {kf}
-                            </span>
-                          ))}
+            {filteredProjects.map((project) => {
+              if (project.id === 'entertainment-case-study') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+                      
+                      {/* Text Details Info (Col-1) */}
+                      <div className="space-y-4 lg:col-span-5 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] font-mono uppercase bg-[#1e1e1e] text-white border border-[#2c2c2c] px-2.5 py-0.5 rounded-none tracking-widest">
+                            Entertainment Campaign
+                          </span>
+                          <span className="text-[9px] font-mono text-[#808080] tracking-wider uppercase font-semibold">• 300DPI Render File</span>
                         </div>
-                      </div>
 
-                      <div className="space-y-1">
-                        <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold">Active Toolkit components:</span>
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          {project.toolsUsed.map((tool, i) => (
-                            <span key={i} className="rounded-none bg-black px-2.5 py-0.5 text-[9px] font-mono text-[#c0c0c0] border border-[#222222]">
-                              {tool}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                        <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-white">
+                          {project.title}
+                        </h3>
+                        <p className="font-mono text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
+                          {project.subtitle}
+                        </p>
+                        <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                          {project.description}
+                        </p>
 
-                      {/* Professional color palette used */}
-                      <div className="space-y-1">
-                        <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold font-bold">Designer Color Swatches:</span>
-                        <div className="flex gap-2 pt-1 h-5 select-none">
-                          {project.colorPalette.map((color, i) => (
-                            <div key={i} className="flex items-center gap-1.5">
-                              <span className="h-3 w-3 rounded-none border border-white/20" style={{ backgroundColor: color }} />
-                              <span className="font-mono text-[8px] text-[#808080] uppercase font-bold">{color}</span>
+                        <div className="h-[1px] bg-[#222222]" />
+
+                        {/* Rich Details and Tools */}
+                        <div className="space-y-3 pt-1">
+                          <div className="space-y-1">
+                            <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold">Aesthetic Features & Deliverables:</span>
+                            <div className="flex flex-wrap gap-1.5 pt-0.5">
+                              {project.keyFeatures.map((kf, i) => (
+                                <span key={i} className="rounded-none bg-[#1c1c1c] px-2.5 py-1 text-[10px] text-zinc-300 border border-[#2c2c2c] font-mono">
+                                  ❖ {kf}
+                                </span>
+                              ))}
                             </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                          </div>
 
-                  {/* CUSTOM BESPOKE LIVE INTERACTIVE UNIT INSTEAD OF EMPTY IMAGES (Col-2) */}
-                  <div className="lg:col-span-7">
-                    {project.id === 'broadcast-marketing-ui' && (
-                      <div className="space-y-4">
-                        <BroadcastMockup />
-                      </div>
-                    )}
-
-                    {project.id === 'cinematic-key-art' && (
-                      <div className="space-y-4 rounded-none border border-[#222222] bg-black p-4">
-                        <div className="relative aspect-video w-full rounded-none lg:h-80 overflow-hidden group/art">
-                          <img 
-                            src="https://picsum.photos/seed/vintage-thriller/800/500" 
-                            alt="Raakh dramatic thriller composited key art poster mockup font selection"
-                            className="h-full w-full object-cover opacity-80"
-                            referrerPolicy="no-referrer"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-zinc-950/20" />
-                          
-                          {/* Floating dramatic movie title layout */}
-                          <div className="absolute inset-0 flex flex-col justify-between p-6">
-                            <div className="flex justify-between items-start">
-                              <span className="font-mono text-[9px] text-zinc-500 tracking-widest uppercase font-bold">DIRECTED BY WHITE RIVERS ART DIRECTION UNIT</span>
-                              <span className="font-mono text-[8px] text-zinc-350 border border-[#222222] bg-[#111111]/80 px-2.5 py-1 rounded-none uppercase font-bold">THRILLER CATEGORY</span>
+                          <div className="space-y-1">
+                            <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold">Active Toolkit components:</span>
+                            <div className="flex flex-wrap gap-1.5 pt-0.5">
+                              {project.toolsUsed.map((tool, i) => (
+                                <span key={i} className="rounded-none bg-black px-2.5 py-0.5 text-[9px] font-mono text-[#c0c0c0] border border-[#222222]">
+                                  {tool}
+                                </span>
+                              ))}
                             </div>
+                          </div>
 
-                            <div className="text-center space-y-1">
-                              <h2 className="font-display text-5xl font-black text-white tracking-wider font-extrabold select-all uppercase">RAAKH</h2>
-                              <div className="h-[1px] w-16 bg-white mx-auto" />
-                              <p className="font-serif text-[10px] text-zinc-305 italic tracking-wide mt-2">"Ashes of the past dictate the burns of tomorrow."</p>
-                            </div>
-
-                            <div className="flex justify-between items-end text-[8px] font-mono text-zinc-400 border-t border-[#222222] pt-2">
-                              <span>35MM RAW TEXTURE GRADE</span>
-                              <span>DIALOGUE DRIVEN SERIES COMPONENT</span>
+                          {/* Professional color palette used */}
+                          <div className="space-y-1">
+                            <span className="block font-mono text-[9px] text-[#808080] uppercase tracking-widest font-bold font-bold">Designer Color Swatches:</span>
+                            <div className="flex gap-2 pt-1 h-5 select-none">
+                              {project.colorPalette.map((color, i) => (
+                                <div key={i} className="flex items-center gap-1.5">
+                                  <span className="h-3 w-3 rounded-none border border-white/20" style={{ backgroundColor: color }} />
+                                  <span className="font-mono text-[8px] text-[#808080] uppercase font-bold">{color}</span>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>
-
-                        <div className="flex items-center gap-2.5 rounded-none bg-[#111111] p-3 border border-[#222222] text-left">
-                          <div className="h-1.5 w-1.5 bg-white shrink-0 animate-pulse" />
-                          <p className="text-[10px] text-zinc-400 leading-normal">
-                            <strong>About Raakh:</strong> Dramatic, dialogue-driven poster designs for the thriller Raakh. Focused on deep color grading, textured typography, and collage-style compositions to tease narrative tension.
-                          </p>
-                        </div>
                       </div>
-                    )}
 
-                    {project.id === 'sports-figurine-concept' && (
-                      <div className="space-y-4">
-                        <FigurineConfigurator />
+                      {/* Custom Live Interactive Unit (Col-2) */}
+                      <div className="lg:col-span-7">
+                        <CaseStudyShowcase />
                       </div>
-                    )}
+                    </div>
                   </div>
+                );
+              }
+              if (project.id === 'big-boss-hindi') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <BigBossSlideshow type="hindi" />
+                  </div>
+                );
+              }
 
-                </div>
-              </div>
-            ))}
+              if (project.id === 'big-boss-marathi') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <BigBossSlideshow type="marathi" />
+                  </div>
+                );
+              }
+
+              if (project.id === 'banijay-asia-campaigns') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <BanijaySlideshow />
+                  </div>
+                );
+              }
+
+              if (project.id === 'cinematic-key-art') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <RaakhSlideshow />
+                  </div>
+                );
+              }
+
+              if (project.id === 'bengal-files-posters') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <BengalFilesShowcase />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-ad-creatives') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5AdCreatives />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-award-creatives') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5AwardCreatives />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-ai-creatives') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5AICreatives />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-smartplay-serials') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5SmartplaySerials />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-statics') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5StaticsShowcase />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-jhs-static') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5JHSShowcase />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-bday-creative') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5BdayCreative />
+                  </div>
+                );
+              }
+
+              if (project.id === 'zee5-logo') {
+                return (
+                  <div 
+                    key={project.id}
+                    className="group rounded-none border border-[#222222] bg-[#111111] p-6 lg:p-8 hover:border-[#333333] transition relative overflow-hidden"
+                  >
+                    <Zee5LogoShowcase />
+                  </div>
+                );
+              }
+
+              return null;
+            })}
           </div>
 
-        </div>
-      </section>
-
-      {/* COMPACT AI RESTORATION DRAG LAB BAR */}
-      <section className="border-t border-[#222222] py-20 bg-[#0a0a0a]">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-8">
-          <div className="space-y-2 text-center">
-            <span className="font-mono text-xs font-semibold tracking-widest text-[#808080] uppercase">Precision Mechanics</span>
-            <h3 className="font-display text-2xl font-extrabold uppercase tracking-tight text-white sm:text-3xl">AI Retouching & Restoration Lab</h3>
-            <p className="mx-auto max-w-lg text-xs text-zinc-400 uppercase tracking-wider font-mono opacity-60">
-              Interactive split slider showcasing Shubham's standard for pure rendering, structural preservation, and background clearing.
-            </p>
-          </div>
-
-          <AIPortfolioSlider />
-        </div>
-      </section>
-
-      {/* ADOBE PHOTOSHOP & AI WORKFLOW SIMULATOR WORKSPACE */}
-      <section id="photoshop-lab" className="border-t border-[#222222] py-20 bg-[#0c0c0c]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center space-y-3">
-            <span className="font-mono text-xs font-semibold tracking-widest text-[#808080] uppercase">Process Simulator</span>
-            <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-white sm:text-4xl">The Designer Workspace HUD</h2>
-            <p className="mx-auto max-w-lg text-xs text-zinc-400 uppercase tracking-wider font-mono opacity-60">
-              Directly manipulate filters and advanced up-sampling settings below. Slide controls to discover how original files transition to professional master layout vectors.
-            </p>
-          </div>
-
-          <ToolkitSimulator />
         </div>
       </section>
 
@@ -687,9 +718,40 @@ export default function App() {
       </section>
 
       {/* FOOTER UNDERPLATE */}
-      <footer className="border-t border-[#222222] bg-[#111111] py-10 text-center text-[10px] text-zinc-500 font-mono tracking-wider uppercase">
-        <p>© {new Date().getFullYear()} Shubham Rasanbhaire. All Rights Reserved.</p>
-        <p className="mt-2 opacity-50 font-semibold">Crafted with high-fidelity React layouts & advanced AI simulation matrices.</p>
+      <footer className="border-t border-[#222222] bg-[#0c0c0e] py-12 px-4 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-4">
+          <button 
+            onClick={() => scrollToSection('hero')} 
+            className="cursor-pointer group flex flex-col items-center gap-3 focus:outline-none"
+            title="Return to Top"
+          >
+            <BrandLogoMark className="h-11 w-11 sm:h-12 sm:w-12" />
+            <span className="font-display font-black text-sm sm:text-base tracking-[0.2em] text-white uppercase group-hover:text-zinc-300 transition">
+              Shubham Rasanbhaire
+            </span>
+          </button>
+          
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-[10px] font-mono tracking-widest text-zinc-400 uppercase my-2">
+            <button onClick={() => scrollToSection('about')} className="hover:text-white transition">About</button>
+            <span className="text-zinc-700">•</span>
+            <button onClick={() => scrollToSection('experience')} className="hover:text-white transition">Experience</button>
+            <span className="text-zinc-700">•</span>
+            <button onClick={() => scrollToSection('services')} className="hover:text-white transition">Expertise</button>
+            <span className="text-zinc-700">•</span>
+            <button onClick={() => scrollToSection('portfolio-labs')} className="hover:text-white transition">Portfolio</button>
+            <span className="text-zinc-700">•</span>
+            <button onClick={() => scrollToSection('contact')} className="hover:text-white transition">Contact</button>
+          </div>
+
+          <div className="w-16 h-[1px] bg-zinc-800 my-1" />
+
+          <p className="text-[10px] text-zinc-500 font-mono tracking-wider uppercase">
+            © {new Date().getFullYear()} Shubham Rasanbhaire. All Rights Reserved. • White Rivers Media
+          </p>
+          <p className="text-[9px] text-zinc-600 font-mono tracking-wider uppercase">
+            Key Art • Entertainment Branding • Digital Cinema Suite
+          </p>
+        </div>
       </footer>
 
     </div>
